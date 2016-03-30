@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *reference;
 @property (nonatomic, strong) NSString *identifier;
+@property (nonatomic, strong) NSString *placeID;
 @property (nonatomic) SPGooglePlacesAutocompletePlaceType type;
 @end
 
@@ -24,14 +25,15 @@
     place.name = placeDictionary[@"description"];
     place.reference = placeDictionary[@"reference"];
     place.identifier = placeDictionary[@"id"];
+    place.placeID = placeDictionary[@"place_id"];
     place.type = SPPlaceTypeFromDictionary(placeDictionary);
     place.key = apiKey;
     return place;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Name: %@, Reference: %@, Identifier: %@, Type: %@",
-            self.name, self.reference, self.identifier, SPPlaceTypeStringForPlaceType(self.type)];
+    return [NSString stringWithFormat:@"Name: %@, Reference: %@, Identifier: %@, PlaceID: %@, Type: %@",
+            self.name, self.reference, self.identifier, self.placeID, SPPlaceTypeStringForPlaceType(self.type)];
 }
 
 - (CLGeocoder *)geocoder {
